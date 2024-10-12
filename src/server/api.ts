@@ -7,28 +7,36 @@ export const getFilmsCall = async ({
   limit = 50,
   offset,
 }: {
-  limit?: number
-  offset: number
-}): Promise<FilmPosterCON[]> => {
+  limit?: number;
+  offset: number;
+}): Promise<{
+  items: FilmPosterCON[];
+  totalCount: number;
+  offset: number;
+  limit: number;
+}> => {
   const normLimit = Math.min(limit, MAX_LIMIT)
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve(
-        data.TendingNow.slice(offset, offset + normLimit)
-        .map((film) => ({
-          Id: film.Id,
-          Title: film.Title,
-          CoverImage: film.CoverImage,
-          TitleImage: film.TitleImage,
-          Date: film.Date,
-          ReleaseYear: film.ReleaseYear,
-          MpaRating: film.MpaRating,
-          Category: film.Category,
-          Duration: film.Duration,
-          VideoUrl: film.VideoUrl,
-          Description: film.Description,
-          }) satisfies FilmPosterCON)
-      )
+      resolve({
+        items: data.TendingNow.slice(offset, offset + normLimit)
+          .map((film) => ({
+            Id: film.Id,
+            Title: film.Title,
+            CoverImage: film.CoverImage,
+            TitleImage: film.TitleImage,
+            Date: film.Date,
+            ReleaseYear: film.ReleaseYear,
+            MpaRating: film.MpaRating,
+            Category: film.Category,
+            Duration: film.Duration,
+            VideoUrl: film.VideoUrl,
+            Description: typeof film.Description === "string" ? film.Description : null,
+            }) satisfies FilmPosterCON),
+        totalCount: data.TendingNow.length,
+        offset: offset,
+        limit: normLimit,
+      })
     }, 1000)
   })
 }
@@ -48,7 +56,7 @@ export const getFeaturedCall = async (): Promise<FilmPosterCON> => {
         Category: featruedData.Category,
         Duration: featruedData.Duration,
         VideoUrl: featruedData.VideoUrl,
-        Description: featruedData.Description,
+        Description: typeof featruedData.Description === "string" ? featruedData.Description : null,
       } satisfies FilmPosterCON)
     }, 1000)
   })
