@@ -1,16 +1,5 @@
 {
-	"Featured": {
-		"Id": "1",
-		"Title": "The Irishman",
-		"CoverImage": "FeaturedCoverImage.png",
-		"TitleImage": "FeaturedTitleImage.png",
-		"Date": "2021-10-24T12:16:50.894556",
-		"ReleaseYear": "2021",
-		"MpaRating": "18+",
-		"Category": "Movie",
-		"Duration": "6000",
-		"Description": "Info About it"
-	},
+	"FeaturedId": "1",
 	"TendingNow": [
 		{
 			"Id": "1",
