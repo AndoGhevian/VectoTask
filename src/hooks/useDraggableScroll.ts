@@ -14,20 +14,30 @@ export const useDraggableScroll = <T extends HTMLElement>(ref: RefObject<T>) => 
   }), [ref])
 
   useDrag(
-    ({ movement: [mx], memo = ref.current?.scrollLeft || 0, active }) => {
+    ({ movement: [mx], last, memo = ref.current?.scrollLeft || 0, active }) => {
       if (!active) {
         isDraggingRef.current = false
         setIsDragging(false)
+      } else {
+        if(!isDraggingRef.current) {
+          setIsDragging(true)
+        }
+        isDraggingRef.current = true
+      }
+
+      if(!ref.current) {
         return
       }
-
-      if (!isDraggingRef.current) {
-        setIsDragging(true)
-      }
-      isDraggingRef.current = true
-
-      if (Math.abs(mx) > threshold && ref.current) {
-        ref.current.scrollLeft = memo - mx
+      
+      if (Math.abs(mx) > threshold || last) {
+        if (active) {
+          ref.current.scrollLeft = memo - mx
+        } else if (last) {
+          ref.current.scrollBy({
+            left: -mx * 3, // Adjust the multiplier for a smoother release
+            behavior: 'smooth',
+          })
+        }
       }
 
       return memo
