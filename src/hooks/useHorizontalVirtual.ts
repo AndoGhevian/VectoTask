@@ -11,6 +11,8 @@ export const useHorizontalVirtual = <T extends any>({
   measureElement,
   overscan,
   initialOffset,
+  paddingStart,
+  paddingEnd,
 }: {
   parentRef: RefObject<HTMLElement>,
   queryFn: (pageParam: {
@@ -28,6 +30,8 @@ export const useHorizontalVirtual = <T extends any>({
   measureElement?: (element: HTMLElement) => number,
   overscan?: number;
   initialOffset?: number;
+  paddingStart?: number;
+  paddingEnd?: number;
 }) => {
   const {
     status,
@@ -61,6 +65,8 @@ export const useHorizontalVirtual = <T extends any>({
     measureElement,
     overscan,
     horizontal: true,
+    paddingStart,
+    paddingEnd,
   })
   const virtualItems = useMemo(() => [...virtualizer.getVirtualItems()], [virtualizer.getVirtualItems()])
 
