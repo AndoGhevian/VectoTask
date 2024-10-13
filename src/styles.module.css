@@ -1,5 +1,134 @@
 .App {
   width: 100vw;
-  height: 100%;
+  min-height: 100vh;
   position: relative;
+  background-color: #040404;
+}
+
+.Main {
+  height: calc(100vh - 296px);
+  width: 100px;
+}
+
+.Sidebar {
+  height: calc(100vh - 296px);
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  transition: height 0s ease 1s;
+}
+
+.Sidebar:hover {
+  transition: height 0s ease;
+  height: 100vh;
+}
+
+.Overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  z-index: 9;
+  transition: width 1s;
+  pointer-events: none;
+}
+
+.Sidebar:hover .Overlay {
+  position: absolute;
+  background: linear-gradient(
+    to right, 
+    rgba(4, 4, 4, 0.8) 20%, /* Start with #040404 at 80% opacity */
+    rgba(4, 4, 4, 1) 40%,   /* Solid #040404 */
+    rgba(4, 4, 4, 0.51) 60%, /* 51% opacity for a smoother transition */
+    rgba(4, 4, 4, 0) 80%    /* Fade out towards full transparency */
+  );
+  top: 0;
+  left: 0;
+  z-index: 9;
+  width: 100vw;
+  height: 100%;
+  pointer-events: none;
+}
+
+.SidebarContent {
+  height: 100%;
+  padding-left: 34px;
+  box-sizing: border-box;
+  transition: padding-left 1s, background-color 1s;
+  
+  background-color: transparent;
+  position: relative;
+  z-index: 10;
+}
+
+.Sidebar:hover .SidebarContent {
+  background-color: #040404;
+  padding-left: 36px;
+}
+
+.MenuItem {
+  width: 82px;
+  height: 82px;
+  padding: 26px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: width 1s,
+    margin-left 1s,
+    opacity 1s,
+    border-radius 1s,
+    background-color 1s,
+    height 1s,
+    padding 1s;
+}
+
+.MenuItem:hover {
+  background-color: #3B486D;
+  opacity: 56%;
+}
+
+.MenuItem img {
+  width: 27px;
+  height: 27px;
+}
+
+.Sidebar:hover .MenuItem {
+  border-radius: 12px;
+  width: 312px;
+  height: 72px;
+  opacity: 1;
+  padding: 19px 24px 17px 24px;
+}
+
+.MenuItemText {
+  margin-left: 50px;
+  visibility: hidden;
+  display: none;
+  color: #F1F1F1;
+}
+
+.Sidebar:hover .MenuItemText {
+  display: block;
+  visibility: visible;
+}
+
+.ProfileSection {
+  padding-top: 60px;
+  padding-bottom: 30px;
+}
+
+.SidebarFooter {
+  height: 300px;
+  pointer-events: none;
+}
+
+@media (max-width: 500px) {
+  .Sidebar:hover .SidebarContent {
+    width: 100vw;
+  }
 }
