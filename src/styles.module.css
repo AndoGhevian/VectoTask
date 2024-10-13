@@ -36,23 +36,6 @@
   pointer-events: none;
 }
 
-.Sidebar:hover .Overlay {
-  position: absolute;
-  background: linear-gradient(
-    to right, 
-    rgba(4, 4, 4, 0.8) 20%, /* Start with #040404 at 80% opacity */
-    rgba(4, 4, 4, 1) 40%,   /* Solid #040404 */
-    rgba(4, 4, 4, 0.51) 60%, /* 51% opacity for a smoother transition */
-    rgba(4, 4, 4, 0) 80%    /* Fade out towards full transparency */
-  );
-  top: 0;
-  left: 0;
-  z-index: 9;
-  width: 100vw;
-  height: 100%;
-  pointer-events: none;
-}
-
 .SidebarContent {
   height: 100%;
   padding-left: 34px;
@@ -62,11 +45,6 @@
   background-color: transparent;
   position: relative;
   z-index: 10;
-}
-
-.Sidebar:hover .SidebarContent {
-  background-color: #040404;
-  padding-left: 36px;
 }
 
 .MenuItem {
@@ -97,14 +75,6 @@
   height: 27px;
 }
 
-.Sidebar:hover .MenuItem {
-  border-radius: 12px;
-  width: 312px;
-  height: 72px;
-  opacity: 1;
-  padding: 19px 24px 17px 24px;
-}
-
 .MenuItemText {
   margin-left: 50px;
   visibility: hidden;
@@ -112,14 +82,11 @@
   color: #F1F1F1;
 }
 
-.Sidebar:hover .MenuItemText {
-  display: block;
-  visibility: visible;
-}
-
-.ProfileSection {
+.MenuItemsList {
   padding-top: 60px;
   padding-bottom: 30px;
+  width: 82px;
+  transition: width 1s;
 }
 
 .SidebarFooter {
@@ -127,8 +94,94 @@
   pointer-events: none;
 }
 
-@media (max-width: 500px) {
-  .Sidebar:hover .SidebarContent {
+.MobileClose {
+  display: none;
+}
+
+@media (min-width: 500px) {
+  .Sidebar:hover .Overlay {
+    position: absolute;
+    background: linear-gradient(
+      to right, 
+      rgba(4, 4, 4, 0.8) 20%, /* Start with #040404 at 80% opacity */
+      rgba(4, 4, 4, 1) 40%,   /* Solid #040404 */
+      rgba(4, 4, 4, 0.51) 60%, /* 51% opacity for a smoother transition */
+      rgba(4, 4, 4, 0) 80%    /* Fade out towards full transparency */
+    );
+    top: 0;
+    left: 0;
+    z-index: 9;
     width: 100vw;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .Sidebar:hover .MenuItem {
+    border-radius: 12px;
+    width: 312px;
+    height: 72px;
+    opacity: 1;
+    padding: 19px 24px 17px 24px;
+  }
+
+  .Sidebar:hover .MenuItemText {
+    display: block;
+    visibility: visible;
+  }
+
+  .Sidebar:hover .SidebarContent {
+    background-color: #040404;
+    padding-left: 36px;
+  }
+}
+
+@media (max-width: 500px) {
+  .MobileClose {
+    display: block;
+    /* padding: 26px; */
+    color: white
+  }
+
+  .Sidebar.mobileHover .Overlay {
+    position: absolute;
+    background: linear-gradient(
+      to right, 
+      rgba(4, 4, 4, 0.8) 20%, /* Start with #040404 at 80% opacity */
+      rgba(4, 4, 4, 1) 40%,   /* Solid #040404 */
+      rgba(4, 4, 4, 0.51) 60%, /* 51% opacity for a smoother transition */
+      rgba(4, 4, 4, 0) 80%    /* Fade out towards full transparency */
+    );
+    top: 0;
+    left: 0;
+    z-index: 9;
+    width: 100vw;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .Sidebar.mobileHover .MenuItem {
+    border-radius: 12px;
+    width: 100%;
+    height: 72px;
+    opacity: 1;
+    padding: 19px 24px 17px 24px;
+  }
+
+  .Sidebar.mobileHover .MenuItemText {
+    display: block;
+    visibility: visible;
+  }
+
+  .Sidebar.mobileHover .SidebarContent {
+    width: 100vw;
+  }
+
+  .Sidebar.mobileHover .SidebarContent {
+    background-color: #040404;
+    padding-left: 36px;
+  }
+
+  .Sidebar.mobileHover .MenuItemsList {
+    width: calc(100vw - 36px);
   }
 }

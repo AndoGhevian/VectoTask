@@ -1,3 +1,4 @@
+import { useRef, useState } from 'react'
 import classNames from 'classnames'
 import { FilmsCarousel } from 'components/filmsCarousel'
 import SearchPNG from 'assets/icons/Search.png'
@@ -9,12 +10,30 @@ import TapePNG from 'assets/icons/Tape.png'
 import styles from "./styles.module.css"
 
 function App() {
+  const targetRef = useRef<HTMLDivElement>(null)
+  const closeElemRef = useRef<HTMLDivElement>(null)
+  const [isMobileHovered, setIsMobileHovered] = useState(false)
+
   return (
     <div className={styles.App}>
-      <div className={classNames(styles.Sidebar, {hoverabel: true})}>
+      <div
+        className={classNames(styles.Sidebar, {[styles.mobileHover]: isMobileHovered})}
+        ref={targetRef}
+        onClick={(e) => {
+          if(e.target === closeElemRef.current) return
+          setIsMobileHovered(true)
+        }}
+      >
         <div className={styles.Overlay}/>
         <div className={styles.SidebarContent}>
-          <div className={styles.ProfileSection}>
+          <div
+          ref={closeElemRef}
+          className={styles.MobileClose}
+          onClick={() => {
+            setIsMobileHovered(false)
+          }}
+          >Close Me</div>
+          <div className={styles.MenuItemsList}>
             <div className={styles.MenuItem}>
               <img src={SearchPNG} alt="Search" />
               <p className={styles.MenuItemText}>Search</p>
