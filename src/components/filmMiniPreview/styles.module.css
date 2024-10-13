@@ -1,0 +1,17 @@
+.Card {
+  width: 200px;
+  height: 296px;
+  display: flex;
+  justify-content: center;
+}
+
+.Image {
+  width: 200px;
+  height: 296px;
+}
+
+.Image img{
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}

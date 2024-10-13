@@ -1,0 +1,23 @@
+.Carousel {
+  width: 100%;
+  height: 296px;
+  overflow: auto;
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+
+.Carousel::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+
+.List {
+  position: relative;
+  height: 100%;
+}
+
+.ListItem {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100px;
+}
